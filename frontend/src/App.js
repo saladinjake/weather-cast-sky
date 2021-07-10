@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
 
 const theme = createTheme({
   palette: {
@@ -30,7 +31,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={() => <Placeholder title="Weather Dashboard" />} />
+          <Route exact path="/" component={Dashboard} />
           <Route path="/forecast/:city" component={() => <Placeholder title="Detailed Forecast" />} />
         </Switch>
       </Router>
