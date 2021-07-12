@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: skycast_api
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - NODE_ENV=development
+    # Note: This project uses external API, no local DB required
+
+  frontend:
+    build: ./frontend
+    container_name: skycast_ui
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
