@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +64,13 @@ const Dashboard = () => {
             pressure: 1012,
             timestamp: new Date().toISOString()
           },
-          forecast: [] // would be populated
+          forecast: [
+            { date: 'Mon', temp: 22 },
+            { date: 'Tue', temp: 25 },
+            { date: 'Wed', temp: 23 },
+            { date: 'Thu', temp: 21 },
+            { date: 'Fri', temp: 24 }
+          ]
         }
       };
       setWeather(res.data);
@@ -118,6 +125,36 @@ const Dashboard = () => {
                   <Paper className={classes.detailItem} elevation={0} style={{ backgroundColor: '#fff' }}>
                     <Typography variant="body2" color="textSecondary">{item.label}</Typography>
                     <Typography variant="h6">{item.value}</Typography>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+            
+            <Box mt={4}>
+              <Paper style={{ padding: '24px', height: '200px' }}>
+                <Typography variant="h6" gutterBottom>Temperature Trend</Typography>
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={weather.forecast}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="temp" stroke="#3f51b5" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </Paper>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Typography variant="h5" gutterBottom>5-Day Forecast</Typography>
+            <Grid container spacing={2}>
+              {weather.forecast.map((day, idx) => (
+                <Grid item xs key={idx}>
+                  <Paper className={classes.detailItem}>
+                    <Typography variant="subtitle2">{day.date}</Typography>
+                    <Typography variant="h5" color="primary">{day.temp}°C</Typography>
+                    <Typography variant="caption">☀️ Sunny</Typography>
                   </Paper>
                 </Grid>
               ))}
