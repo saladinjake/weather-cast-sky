@@ -14,7 +14,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
-    "recharts": "^3.8.1",
+    "recharts": "2.12.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,7 +43,6 @@
   },
   "proxy": "http://backend:5000",
   "overrides": {
-    "ajv": "^8.6.3",
-    "ajv-keywords": "^5.1.0"
+    "recharts": "2.12.7"
   }
 }
